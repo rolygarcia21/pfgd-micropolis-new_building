@@ -42,7 +42,7 @@ class MapScanner extends TileBehavior
 		STADIUM_FULL,
 		AIRPORT,
 		SEAPORT,
-		FARM; 
+		FARM; //Placeholder enum for new building. Change to building name if making a new building
 	}
 
 	@Override
@@ -86,7 +86,7 @@ class MapScanner extends TileBehavior
 			doSeaport();
 			return;
 		case FARM:
-			doFarm();
+			doFarm(); //Call the NEW_BUILDING placeholder function
 			return;
 		default:
 			assert false;
