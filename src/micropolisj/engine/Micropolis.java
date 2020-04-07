@@ -125,6 +125,7 @@ public class Micropolis
 	int nuclearCount;
 	int seaportCount;
 	int airportCount;
+	int farmCount; //Count of the number of farms on the map
 
 	int totalPop;
 	int lastCityPop;
@@ -135,6 +136,7 @@ public class Micropolis
 	int lastTotalPop;
 	int lastFireStationCount;
 	int lastPoliceCount;
+	int lastFarmCount;
 
 	int trafficMaxLocationX;
 	int trafficMaxLocationY;
@@ -1155,17 +1157,26 @@ public class Micropolis
 				int zx = 2*x;
 				int zy = 2*y;
 
+				//Loop through the map
 				for (int mx = zx; mx <= zx+1; mx++)
 				{
 					for (int my = zy; my <= zy+1; my++)
 					{
+						//Determine examined tile type
 						int tile = getTile(mx, my);
 						if (tile != DIRT)
-						{
+						{	
 							if (tile < RUBBLE) //natural land features
 							{
-								//inc terrainMem
+								//Natural land features increase
 								qtem[y/2][x/2] += 15;
+								continue;
+							} else if (tile == FARM) //Farms
+							{
+								//If we find a farm, increment the terrainMem value because
+								//farm is a "natural feature" but has increased value due to
+								//production
+								qtem[y/2][x/2] += 30;
 								continue;
 							}
 							plevel += getPollutionValue(tile);
@@ -1187,7 +1198,7 @@ public class Micropolis
 				{
 					//land value equation
 
-
+					//MAGIC NUMBERS EVERYWHERE
 					int dis = 34 - getDisCC(x, y);
 					dis *= 4;
 					dis += terrainMem[y/2][x/2];
@@ -1426,7 +1437,7 @@ public class Micropolis
 		return mem;
 	}
 
-	// calculate manhatten distance (in 2-units) from center of city
+	// calculate manhattan distance (in 2-units) from center of city
 	// capped at 32
 	int getDisCC(int x, int y)
 	{
@@ -1731,6 +1742,7 @@ public class Micropolis
 		lastTotalPop = totalPop;
 		lastFireStationCount = fireStationCount;
 		lastPoliceCount = policeCount;
+		lastFarmCount = farmCount;
 
 		BudgetNumbers b = generateBudget();
 

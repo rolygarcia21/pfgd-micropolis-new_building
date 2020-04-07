@@ -214,6 +214,7 @@ class MapScanner extends TileBehavior
 	{
 		//Very basic building functionality. Checks for power and does "repair"
 		boolean powerOn = checkZonePower();
+		city.farmCount++;
 		if ((city.cityTime % 8) == 0) {
 			repairZone(FARM, 3);
 		}
