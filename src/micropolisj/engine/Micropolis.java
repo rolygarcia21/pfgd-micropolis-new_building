@@ -1166,17 +1166,13 @@ public class Micropolis
 						int tile = getTile(mx, my);
 						if (tile != DIRT)
 						{	
-							if (tile < RUBBLE) //natural land features
+							//If we find a farm or a natural land feature, increment the terrainMem value because
+							//farm is a "natural feature" but has increased value due to
+							//production
+							if (tile < RUBBLE || tile == FARM)
 							{
 								//Natural land features increase
 								qtem[y/2][x/2] += 15;
-								continue;
-							} else if (tile == FARM) //Farms
-							{
-								//If we find a farm, increment the terrainMem value because
-								//farm is a "natural feature" but has increased value due to
-								//production
-								qtem[y/2][x/2] += 30;
 								continue;
 							}
 							plevel += getPollutionValue(tile);

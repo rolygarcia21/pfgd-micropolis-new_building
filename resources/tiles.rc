@@ -1014,7 +1014,7 @@
 961   farm@16,0           (conducts)
 962   farm@32,0           (conducts)
 963   farm@0,16           (conducts)
-964   farm@16,16    (zone)(conducts)(building=3x3)(behavior=FARM)(population=16)(pollution=25)(description=#28)
+964   farm@16,16    (zone)(conducts)(building=3x3)(commercial-zone)(residential-zone)(behavior=FARM)(population=16)(description=#28)(pollution=25)
 965   farm@32,16          (conducts)
 966   farm@0,32           (conducts)
 967   farm@16,32          (conducts)

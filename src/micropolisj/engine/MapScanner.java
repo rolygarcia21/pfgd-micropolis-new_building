@@ -42,7 +42,7 @@ class MapScanner extends TileBehavior
 		STADIUM_FULL,
 		AIRPORT,
 		SEAPORT,
-		FARM; //Placeholder enum for new building. Change to building name if making a new building
+		FARM; //Enum for FARM
 	}
 
 	@Override
@@ -86,7 +86,11 @@ class MapScanner extends TileBehavior
 			doSeaport();
 			return;
 		case FARM:
-			doFarm(); //Call the NEW_BUILDING placeholder function
+			//Perform both residential and commercial operations on the farm since
+			//it counts as both
+			//doResidential();
+			//doCommercial();
+			doFarm();
 			return;
 		default:
 			assert false;
@@ -208,11 +212,17 @@ class MapScanner extends TileBehavior
 		city.powerPlants.add(new CityLocation(xpos, ypos));
 	}
 	
-	//Placeholder for a new building
-	//Look to the other do<building name>() functions to guidance on what this function should do.
 	void doFarm()
 	{
-		//Very basic building functionality. Checks for power and does "repair"
+
+		
+		city.comPop += commercialZonePop(tile) / 2;
+		city.resPop += residentialZonePop(tile) / 2;
+		
+		city.comZoneCount++;
+		city.resZoneCount++;
+		
+		//Checks for power and does "repair" on the farm
 		boolean powerOn = checkZonePower();
 		city.farmCount++;
 		if ((city.cityTime % 8) == 0) {
